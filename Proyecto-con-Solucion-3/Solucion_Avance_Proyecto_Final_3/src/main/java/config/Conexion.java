@@ -8,6 +8,10 @@ import org.slf4j.LoggerFactory;
 
 public class Conexion {
     private static final Logger logger = LoggerFactory.getLogger(Conexion.class);
+
+    public static Connection getConexion() {
+        return new Conexion().getConnection();
+    }
     
     private Connection con;
     private final String bd = "sistema_laptops";

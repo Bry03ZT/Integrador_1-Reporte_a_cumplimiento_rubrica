@@ -83,7 +83,7 @@ Se identificaron y resolvieron **3 observaciones** antes de la entrega final del
 | **Objetivo** | Verificar que el campo contraseña tampoco es vulnerable a inyección SQL |
 | **Herramienta** | Formulario de login de la aplicación |
 | **Vulnerabilidad OWASP** | A03:2021 – Injection |
-| **Pasos realizados** | 1. En el campo **Usuario** escribir: `admin` <br> 2. En el campo **Contraseña** escribir: `' OR '1'='1' --` <br> 3. Click en "Ingresar" |
+| **Pasos realizados** | 1. En el campo **Usuario** escribir: `admin@tech.com` <br> 2. En el campo **Contraseña** escribir: `' OR '1'='1' --` <br> 3. Click en "Ingresar" |
 | **Resultado esperado** | El login falla — no se permite el acceso |
 | **Resultado obtenido** | ✅ El login falló correctamente. El payload fue tratado como string literal por el `PreparedStatement` |
 | **Observación levantada** | Ninguna adicional — la protección ya aplica a ambos campos |
