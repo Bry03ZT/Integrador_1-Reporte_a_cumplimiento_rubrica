@@ -68,29 +68,20 @@ SELECT * FROM usuarios;
 
 ---
 
-## PASO 2 — Compilar el proyecto con Maven
+## PASO 2 — Compilar el proyecto y generar el .WAR
 
-### 2.1 Abrir una terminal en la carpeta del proyecto
-```
-Ruta: Proyecto-con-Solucion-3/Solucion_Avance_Proyecto_Final_3/
-```
+### 2.1 Generar el archivo mediante el IDE (Ej. NetBeans)
+1. Abrir el proyecto en el IDE (por ejemplo, Apache NetBeans).
+2. Dar clic derecho sobre el nombre del proyecto y seleccionar **"Clean and Build"** (Limpiar y Construir).
+3. Esperar a que termine el proceso. Esto compilará todo el código Java y empaquetará el proyecto.
 
-### 2.2 Ejecutar el comando de compilación
-```bash
-mvn clean package -DskipTests
-```
+### 2.2 Ubicar el archivo .war generado
+1. En NetBeans, ir a la pestaña **"Files"** (Archivos) que está junto a la pestaña Projects.
+2. Desplegar la carpeta del proyecto y buscar la subcarpeta llamada `target`.
+3. Dentro de la carpeta `target` verás que se ha creado el archivo:
+   `Solucion_Avance_Proyecto_Final_3-04.war`
 
-### 2.3 Verificar que se generó el .war
-```
-✅ Resultado esperado:
-   [INFO] BUILD SUCCESS
-   
-   Archivo generado:
-   target/Solucion_Avance_Proyecto_Final_3-04.war
-```
-
-> **¿Error de Maven no encontrado?** Verificar que `mvn` está en el PATH del sistema,
-> o abrir el proyecto directamente en NetBeans/IntelliJ y usar "Clean and Build".
+Este archivo `.war` (Web Application Archive) es el paquete final de tu proyecto. Cuando copies este archivo a la carpeta de Tomcat, el servidor automáticamente lo reconocerá, lo descomprimirá y lo pondrá en ejecución.
 
 ---
 
@@ -123,8 +114,9 @@ INFO: Server startup in [X] milliseconds
 URL: http://localhost:8080/Solucion_Avance_Proyecto_Final_3-04/
 ```
 
-> **Si Tomcat arroja error en el puerto 8080:** Otro proceso está usando ese puerto.
-> Cambiar en `C:\tomcat9\conf\server.xml` → `<Connector port="8080"` → cambiar a `8090`.
+> **🛠️ Si la página no carga o da error:**
+> 1. **¿El servidor está apagado?** Verifica en NetBeans (pestaña "Services" -> "Servers") que Apache Tomcat esté corriendo. Si tiene un ícono de detenido, haz clic derecho y selecciona **"Start"** (Iniciar).
+> 2. **¿Error de puerto ocupado (8080)?** Si Tomcat no puede iniciar porque otro proceso usa el puerto 8080, cámbialo. Abre `C:\tomcat9\conf\server.xml`, busca `<Connector port="8080"` y cámbialo a `8090`. *(Si haces esto, la URL para entrar será con 8090)*.
 
 ---
 
@@ -151,28 +143,19 @@ En la consola de Tomcat buscar:
 
 ---
 
-## 📦 Checklist de entrega — Lo que debes presentar
+## 📦 Verificación Final del Despliegue
 
 ```
-✅ 1. Demostrar: mvn clean package → BUILD SUCCESS (en consola)
-✅ 2. Mostrar el archivo: target/Solucion_Avance_Proyecto_Final_3-04.war
-✅ 3. Mostrar: Tomcat corriendo con la app desplegada
-✅ 4. Abrir en navegador: http://localhost:8080/Solucion_Avance_Proyecto_Final_3-04/
-✅ 5. Hacer login exitoso → demuestra que la BD está conectada y funcionando
-✅ 6. Mostrar pom.xml → señalar <packaging>war</packaging>
-✅ 7. Mostrar context.xml y web.xml → "configuración del servidor"
+✅ 1. Compilación exitosa: "Clean and Build" en el IDE finalizado sin errores.
+✅ 2. Generación del artefacto: El archivo .war se encuentra en la subcarpeta target/.
+✅ 3. Servidor activo: Apache Tomcat está en ejecución con la aplicación desplegada.
+✅ 4. Interfaz accesible: La URL de localhost responde correctamente en el navegador.
+✅ 5. Conexión a BD verificada: El inicio de sesión en el sistema es exitoso.
+✅ 6. Dependencias validadas: pom.xml contiene el empaquetado WAR correcto.
+✅ 7. Configuración de contexto validada: context.xml y web.xml leídos correctamente.
 ```
 
----
 
-## 🗣️ Frase para la sustentación del Criterio 2
-
-> *"El proyecto está construido con Maven, utilizando empaquetamiento WAR (`<packaging>war</packaging>`)
-> que es el estándar para aplicaciones Java EE desplegadas en servidores de aplicaciones.
-> Se despliega en Apache Tomcat 9, configurado mediante `context.xml` para el path del contexto
-> y `web.xml` para el session-timeout. El driver JDBC de PostgreSQL está declarado como
-> dependencia en el `pom.xml`, lo que permite la conexión a la base de datos de forma automática
-> al momento del despliegue."*
 
 ---
 
@@ -201,6 +184,3 @@ En la consola de Tomcat buscar:
   [ Navegador ]
 ```
 
----
-
-*Generado el 2026-06-16 | Curso Integrador I — UTP | Semana 13*
